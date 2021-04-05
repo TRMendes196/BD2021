@@ -1,4 +1,6 @@
-  Spotify(nome a mudar)
+  Spotify(nome a mudar) / KeepListening
+  
+  O tema do projeto centra-se num sistema de gestão de uma aplicação Web focada na procura por música e respetivas "lyrics". O KeepListening é uma platataforma que inclui utilizadores, faixas, playlists e um espaço de convívio entre admiradores de certos artistas.
   
   
   Desc:
