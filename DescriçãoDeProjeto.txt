@@ -1,13 +1,9 @@
   Spotify(nome a mudar) / KeepListening
   
   O tema do projeto centra-se num sistema de gestão de uma aplicação Web focada na procura por música e respetivas 'lyrics'. O KeepListening é uma platataforma que inclui utilizadores, músicas e 'playlists'. 
-  O objetivo deste gestor é permitir que todos os utilizadores possam aceder a uma qualquer música/cantor/banda que pretendam ouvir através de um motor de busca. Após a seleção da música podemos ouvi-la enquanto acompanhamos as 'lyrics' da mesma.
-  Cada utilizador terá ainda uma área de cliente
+  O objetivo deste gestor é permitir que todos os utilizadores possam aceder a uma qualquer música/artista que pretendam ouvir através de um motor de busca. Após a seleção da música podemos ouvi-la enquanto acompanhamos as 'lyrics' da mesma.
+  Cada utilizador terá ainda uma área de cliente.
   
  
-  
-  
   Desc:
- Cada artista é identificado pelo seu número de identificação profissional, sendo que estão disponíveis igualmente a sua data de nascimento, estilo musical e reportório.
-  
- O reportório de um artista contém todas as suas músicas, que por sua vez, podem estar associadas a um álbum.
+  - Cada artista tem um id de registo na aplicação, sendo que estão disponíveis igualmente a sua data de nascimento, estilo musical.
