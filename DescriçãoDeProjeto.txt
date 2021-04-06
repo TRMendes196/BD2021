@@ -2,16 +2,16 @@
   
   O tema do projeto centra-se num sistema de gestão de uma aplicação Web focada na procura por música e respetivas 'lyrics'. O KeepListening é uma platataforma que inclui utilizadores, músicas, 'playlists' e mais. 
   O objetivo deste gestor é permitir que todos os utilizadores possam aceder a uma qualquer música/artista que pretendam ouvir através de um motor de busca. Após a seleção da música podemos ouvi-la enquanto acompanhamos as 'lyrics' da mesma.
-  O gestor também disponibiliza de outras formas de entretenimento focadas em audio, como podcasts e audiobooks, estes poderão ser submetidos por "criadores".
+  O gestor também disponibiliza outras formas de entretenimento focadas em audio, como podcasts e audiobooks, estes poderão ser submetidos por "criadores".
  
   
  
   Descrição:
-  - Cada utilizador poderá seguir criadores e artistas, marcar músicas como favoritos e criar playlists pessoais.
-  - Cada artista poderá incluir uma descrição de si e incluir informação como o seu estilo musical.
-  - Artistas podem submeter albuns ou singles e com cada música informação como o género musical, letra da música e outros artistas que colaboraram.
+  - Cada utilizador poderá seguir criadores e artistas, marcar músicas como favoritos e criar playlists pessoais. O utilizador é identificado pelo seu nickname, sendo que também apresenta e-mail,password, género musical preferido e artista preferido. 
+  - Cada artista deverá incluir informação como o seu estilo musical e alguma informação biográfica.
+  - Artistas podem submeter músicas(  ue podem fazer parte de álbuns) e cada música inclui informação como a sua letra e outros artistas que colaboraram('feats').
   - Artistas são criadores.
-  - Cada criador também poderá submeter podcasts, audiobooks ou outros tipos de media focados em áudio.
+  - Cada criador  inclui informação como última criação e também poderá submeter podcasts, audiobooks ou outros tipos de media focados em áudio.
   - Cada tipo de media que não seja música terá uma descrição e informação para que possa ser categorizada para pesquisa fácil, por exemplo: podcasts terão temas, audiobooks terão o género de livro, autor e narrador.
   
   
