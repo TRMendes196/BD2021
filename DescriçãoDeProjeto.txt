@@ -12,8 +12,7 @@
   - Artistas são criadores de conteúdo/media.
   - Artistas podem submeter músicas( que podem fazer parte de álbuns) e cada música inclui informação como a sua letra e outros artistas que colaboraram('feats').
   - Cada criador inclui informação como última criação e também poderá submeter podcasts, audiobooks ou outros tipos de media focados em áudio.
-  - Cada tipo de media que não seja música terá uma descrição e informação para que possa ser categorizada para pesquisa fácil, por exemplo: podcasts terão temas e id de registo, audiobooks terão o género de livro, autor e narrador e, claro um identificador("id").
+  - Cada tipo de media que não seja música terá uma descrição e informação para que possa ser categorizada para pesquisa fácil, por exemplo: podcasts terão temas e id de registo, audiobooks terão o género de livro, autor e narrador e, claro um identificador("id"). Ambos terão  um tipo de transmissão - sendo que o tipo poderá incluir conteúdo para surdos, que possam "ouvir" através das vibrações que produzem código Morse.
   - Cada música respeita a um artista, sendo que inclui nome, data de edição, número de 'likes', assumindo que um mesmo artista não tem 2 ou mais músicas com o mesmo nome.
   - As playlists são identificadas pelo seu índice de inserção e disponibilizam informação quanto à data de criação, bem como nome e breve descrição da mesma, como "Metal para bebés", ou algo elucidativo. 
-  - Audiobooks e podcasts incluem um id de registo, data de criação, tema, tipo - sendo que o tipo poderá incluir conteúdo para surdos, que possam "ouvir" através das vibrações que produzem código Morse.
   
