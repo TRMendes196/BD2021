@@ -1,0 +1,99 @@
+create table user(
+  id_user number(9,0),
+  nickname varchar2(10),
+  email varchar2(30),
+  full_name varchar2(50),
+  password varchar2(10),
+  favourite_genre number(4,0),
+  favourite_artist number(6,0)
+);
+
+create table artist(
+  id_user number(9,0),
+  id_genre number(4,0),
+  stage_name varchar2(30), 
+  wiki varchar2(300)
+);
+
+create table maker(
+  id_user number(9,0),
+  tag varchar2(10)
+);
+
+create table media(
+  id_media number(10,0), 
+  duration varchar2(5), 
+  id_maker number(9,0), 
+  description varchar2(50), 
+  creation_date date, 
+  views number(9,0)
+);
+
+create table podcast(
+  id_media number(10,0),
+  theme varchar2(20)
+);
+
+create table audiobook(
+  id_media number(10,0),
+  title varchar2(20),
+  narrator varchar2(20),
+  author varchar2(20)
+);
+
+create table liveStream(
+  id_media number(10,0),
+  schedule varchar2(20)
+);
+
+create table album(
+  id_user number(9,0),
+  album_name varchar2(9,0),
+  release_year number(4,0),
+  id_genre number(4,0),
+  views number(9,0)
+);
+
+create table song(
+  id_user number(9,0),
+  album_name varchar2(9,0),
+  song_name varchar2(20),
+  lyrics number(4,0),
+  id_genre number(4,0),
+  views number(9,0)
+);
+
+create table playList(
+  id_playList number(9,0),
+  id_user number(9,0),
+  description varchar2(30,0),
+  creation_date date,
+  views number(9,0)
+);
+
+create table genre(
+  id_genre number(4,0),
+  genre_name varchar2(20)
+);
+
+create table makeP(
+  id_user number(9,0),
+  id_playList number(9,0)
+);
+
+create table follows(
+  id_user number(9,0),
+  id_playList number(9,0)
+);
+
+create table cSong(
+  id_playList number(9,0),
+  id_user number(9,0),
+  album_name varchar2(9,0),
+  song_name varchar2(20)
+);
+
+create table cMedia(
+  id_playList number(9,0),
+  id_media number(10,0)
+);
