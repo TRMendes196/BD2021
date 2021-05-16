@@ -85,6 +85,15 @@ create table genre(
   genre_name varchar2(20) not null
 );
 
+create table cSong(
+  id_cSong number(9,0),
+  id_playList number(9,0),
+  id_user number(9,0),
+  album_name varchar2(9,0),
+  song_name varchar2(20),
+  order number(2,0)
+);
+
 //relations
 
 create table makeP(
@@ -95,13 +104,6 @@ create table makeP(
 create table follows(
   id_user number(9,0),
   id_playList number(9,0)
-);
-
-create table cSong(
-  id_playList number(9,0),
-  id_user number(9,0),
-  album_name varchar2(9,0),
-  song_name varchar2(20)
 );
 
 create table cMedia(
