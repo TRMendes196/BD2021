@@ -1,5 +1,19 @@
-create table user(
-  id_user number(9,0)  primary key,
+drop table usertemp cascade constraints;
+drop table artist cascade constraints;
+drop table maker cascade constraints;
+drop table media cascade constraints;
+drop table podcast cascade constraints;
+drop table audiobook cascade constraints;
+drop table livestream cascade constraints;
+drop table album cascade constraints;
+drop table audiobook cascade constraints;
+drop table song cascade constraints;
+drop table playlist cascade constraints;
+drop table genre cascade constraints;
+
+
+create table usertemp(
+  id_user number(9,0),
   nickname varchar2(10) not null,
   email varchar2(30) not null,
   full_name varchar2(50) not null,
@@ -9,83 +23,74 @@ create table user(
 );
 
 create table artist(
-  id_user number(9,0) primary key,
+  id_user number(9,0),
   id_genre number(4,0),
   stage_name varchar2(30) not null, 
   wiki varchar2(300)
 );
 
 create table maker(
-  id_user number(9,0) primary key,
+  id_user number(9,0),
   tag varchar2(10)
 );
 
 create table media(
-  id_media number(10,0) primary key, 
+  id_media number(10,0), 
   duration varchar2(5) not null, 
   id_user number(9,0) not null, 
   description varchar2(50), 
   creation_date date not null, 
   views number(9,0),
-  
-  foreign key(id_user) references maker
 );
 
 create table podcast(
-  id_media number(10,0) primary key,
+  id_media number(10,0),
   theme varchar2(20)
 );
 
 create table audiobook(
-  id_media number(10,0) primary key,
+  id_media number(10,0),
   title varchar2(20) not null,
   narrator varchar2(20) not null,
   author varchar2(20) not null
 );
 
 create table liveStream(
-  id_media number(10,0) primary key,
+  id_media number(10,0),
   schedule varchar2(20)
 );
 
 create table album(
-  id_user number(9,0) primary key,
+  id_user number(9,0),
   album_name varchar2(9,0) not null,
   release_year number(4,0) not null,
   id_genre number(4,0),
   views number(9,0),
-  
-  foreign key(id_user) references artist
 );
 
 create table song(
-  id_user number(9,0) primary key,
-  album_name varchar2(9,0) primary key,
+  id_user number(9,0),
+  album_name varchar2(9,0),
   song_name varchar2(20) not null,
   lyrics varchar2(100,0),
   id_genre number(4,0),
   views number(9,0),
-  
-  foreign key(id_user) references artist,
-  foreign key(album_name) references album
 );
 
-create table playList(
-  id_playList number(9,0) primary key,
+create table playlist(
+  id_playlist number(9,0),
   id_user number(9,0) not null,
   description varchar2(30,0),
   creation_date date not null,
   views number(9,0),
-  
-  foreign key(id_user) references user,
 );
 
 create table genre(
-  id_genre number(4,0) primary key,
-  genre_name varchar2(20) not null
+  id_genre number(4,0),
+  genre_name varchar2(20)
 );
 
-//relations
+--relations
 
 create table cSong(
   id_cSong number(9,0),
@@ -123,12 +128,31 @@ create table cMedia(
   foreign key (id_playList) references playlist
 );
 
+-- primary keys
 
+alter table usertemp add constraint pk_user primary key(id_user);
+alter table artist add constraint pk_artist primary key(id_user);
+alter table maker add constraint pk_maker primary key(id_user);
+alter table media add constraint pk_media primary key(id_media);
+alter table podcast add constraint pk_podcast primary key(id_media);
+alter table audiobook add constraint pk_audiobook primary key(id_media);
+alter table livestream add constraint pk_livestream primary key(id_media);
+alter table album add constraint pk_album primary key(id_user);
+alter table song add constraint pk_song primary key(id_user, album_name);
+alter table playlist add constraint pk_playlist primary key(id_playlist);
+alter table genre add constraint pk_genre primary key(id_genre);
 
+-- foreign keys
+alter table media add constraint fk_media foreign key (id_user) references maker(id_user);
+alter table album add constraint fk_album foreign key (id_user) references artist(id_user);
+alter table song add constraint fk_song1 foreign key (album_name) references album(album_name);
+alter table song add constraint fk_song2 foreign key (id_user) references artist(id_user);
+alter table playlist add constraint fk_playlist foreign key (id_user) references usertemp(id_user);
 
+--unique
+alter table genre add constraint un_genre unique(genre_name);
 
-
-//assertions
+--assertions
 
 create assertion disjoint_media check
  (not exists ((select id_media from podcast) intersect (select id_media from audiobook)  intersect (select id_media from livestream)));
