@@ -1,80 +1,91 @@
 create table user(
-  id_user number(9,0),
-  nickname varchar2(10),
-  email varchar2(30),
-  full_name varchar2(50),
-  password varchar2(10),
+  id_user number(9,0)  not null primary key,
+  nickname varchar2(10) not null,
+  email varchar2(30) not null,
+  full_name varchar2(50) not null,
+  password varchar2(10) not null,
   favourite_genre number(4,0),
   favourite_artist number(6,0)
 );
 
 create table artist(
-  id_user number(9,0),
+  id_user number(9,0) not null primary key,
   id_genre number(4,0),
-  stage_name varchar2(30), 
+  stage_name varchar2(30) not null, 
   wiki varchar2(300)
 );
 
 create table maker(
-  id_user number(9,0),
+  id_user number(9,0) not null primary key,
   tag varchar2(10)
 );
 
 create table media(
-  id_media number(10,0), 
-  duration varchar2(5), 
-  id_maker number(9,0), 
+  id_media number(10,0) not null primary key, 
+  duration varchar2(5) not null, 
+  id_user number(9,0) not null, 
   description varchar2(50), 
-  creation_date date, 
-  views number(9,0)
+  creation_date date not null, 
+  views number(9,0),
+  
+  foreign key(id_user) references maker
 );
 
 create table podcast(
-  id_media number(10,0),
+  id_media number(10,0) not null primary key,
   theme varchar2(20)
 );
 
 create table audiobook(
-  id_media number(10,0),
-  title varchar2(20),
-  narrator varchar2(20),
-  author varchar2(20)
+  id_media number(10,0) not null primary key,
+  title varchar2(20) not null,
+  narrator varchar2(20) not null,
+  author varchar2(20) not null
 );
 
 create table liveStream(
-  id_media number(10,0),
+  id_media number(10,0) not null primary key,
   schedule varchar2(20)
 );
 
 create table album(
-  id_user number(9,0),
-  album_name varchar2(9,0),
-  release_year number(4,0),
+  id_user number(9,0) not null primary key,
+  album_name varchar2(9,0) not null,
+  release_year number(4,0) not null,
   id_genre number(4,0),
-  views number(9,0)
+  views number(9,0),
+  
+  foreign key(id_user) references artist
 );
 
 create table song(
-  id_user number(9,0),
-  album_name varchar2(9,0),
-  song_name varchar2(20),
+  id_user number(9,0) not null primary key,
+  album_name varchar2(9,0) not null primary key,
+  song_name varchar2(20) not null,
   lyrics number(4,0),
   id_genre number(4,0),
-  views number(9,0)
+  views number(9,0),
+  
+  foreign key(id_user) references artist,
+  foreign key(album_name) references album
 );
 
 create table playList(
-  id_playList number(9,0),
-  id_user number(9,0),
+  id_playList number(9,0) not null primary key,
+  id_user number(9,0) not null,
   description varchar2(30,0),
-  creation_date date,
-  views number(9,0)
+  creation_date date not null,
+  views number(9,0),
+  
+  foreign key(id_user) references user,
 );
 
 create table genre(
-  id_genre number(4,0),
-  genre_name varchar2(20)
+  id_genre number(4,0) not null primary key,
+  genre_name varchar2(20) not null
 );
+
+//relations
 
 create table makeP(
   id_user number(9,0),
@@ -97,3 +108,67 @@ create table cMedia(
   id_playList number(9,0),
   id_media number(10,0)
 );
+
+create table make_media(
+  id_media number(10,0) not null,
+  id_user number(9,0) not null,
+  primary key (id_media, id_user),
+  foreign key (id_media) references media,
+  foreign key (id_user) references maker
+);
+
+create table composes(
+  album_name varchar2(9,0) not null,
+  id_user number(9,0) not null,
+  primary key (album_name, id_user),
+  foreign key (album_name) references album,
+  foreign key (id_user) references maker
+);
+
+create table belongs_to(
+  album_name varchar2(9,0) not null,
+  song_name number(9,0) not null,
+  primary key (album_name, song_name),
+  foreign key (album_name) references album,
+  foreign key (song_name) references song
+);
+
+
+create table favourite(
+  id_genre number(4,0) not null,
+  id_user number(9,0) not null,
+  primary key (id_genre, id_user),
+  foreign key (id_genre) references genre,
+  foreign key (id_user) references user
+);
+
+create table style(
+  id_genre number(4,0) not null,
+  id_user number(9,0) not null,
+  primary key (id_genre, id_user),
+  foreign key (id_genre) references genre,
+  foreign key (id_user) references artist
+);
+
+create table predominates(
+  id_genre number(4,0) not null,
+  album_name varchar2(9,0) not null,
+  primary key (id_genre, album_name),
+  foreign key (id_genre) references genre,
+  foreign key (album_name) references album
+);
+
+create table refers_to(
+  id_genre number(4,0) not null,
+  song_name number(9,0) not null,
+  primary key (id_genre, song_name),
+  foreign key (id_genre) references album,
+  foreign key (song_name) references song
+);
+
+//assertions
+
+create assertion disjoint_media check
+ (not exists ((select id_media from podcast) intersect (select id_media from audiobook)  intersect (select id_media from livestream)));
+
+
