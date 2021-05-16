@@ -85,6 +85,8 @@ create table genre(
   genre_name varchar2(20) not null
 );
 
+//relations
+
 create table cSong(
   id_cSong number(9,0),
   id_playList number(9,0),
@@ -94,79 +96,37 @@ create table cSong(
   order number(2,0)
 );
 
-//relations
-
 create table makeP(
   id_user number(9,0),
-  id_playList number(9,0)
+  id_playList number(9,0),
+  
+  primary key (id_user, id_playList),
+  foreign key (id_user) references user,
+  foreign key (id_playList) references playlist
 );
 
 create table follows(
   id_user number(9,0),
-  id_playList number(9,0)
+  id_playList number(9,0),
+  
+  primary key (id_user, id_playList),
+  foreign key (id_user) references user,
+  foreign key (id_playList) references playlist
 );
 
 create table cMedia(
   id_playList number(9,0),
-  id_media number(10,0)
-);
-
-create table make_media(
-  id_media number(10,0) not null,
-  id_user number(9,0) not null,
-  primary key (id_media, id_user),
+  id_media number(10,0),
+  
+  primary key (id_media, id_playList),
   foreign key (id_media) references media,
-  foreign key (id_user) references maker
-);
-
-create table composes(
-  album_name varchar2(9,0) not null,
-  id_user number(9,0) not null,
-  primary key (album_name, id_user),
-  foreign key (album_name) references album,
-  foreign key (id_user) references maker
-);
-
-create table belongs_to(
-  album_name varchar2(9,0) not null,
-  song_name number(9,0) not null,
-  primary key (album_name, song_name),
-  foreign key (album_name) references album,
-  foreign key (song_name) references song
+  foreign key (id_playList) references playlist
 );
 
 
-create table favourite(
-  id_genre number(4,0) not null,
-  id_user number(9,0) not null,
-  primary key (id_genre, id_user),
-  foreign key (id_genre) references genre,
-  foreign key (id_user) references user
-);
 
-create table style(
-  id_genre number(4,0) not null,
-  id_user number(9,0) not null,
-  primary key (id_genre, id_user),
-  foreign key (id_genre) references genre,
-  foreign key (id_user) references artist
-);
 
-create table predominates(
-  id_genre number(4,0) not null,
-  album_name varchar2(9,0) not null,
-  primary key (id_genre, album_name),
-  foreign key (id_genre) references genre,
-  foreign key (album_name) references album
-);
 
-create table refers_to(
-  id_genre number(4,0) not null,
-  song_name number(9,0) not null,
-  primary key (id_genre, song_name),
-  foreign key (id_genre) references album,
-  foreign key (song_name) references song
-);
 
 //assertions
 
