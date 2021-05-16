@@ -62,7 +62,7 @@ create table song(
   id_user number(9,0) primary key,
   album_name varchar2(9,0) primary key,
   song_name varchar2(20) not null,
-  lyrics number(4,0),
+  lyrics varchar2(100,0),
   id_genre number(4,0),
   views number(9,0),
   
