@@ -1,5 +1,5 @@
 create table user(
-  id_user number(9,0)  not null primary key,
+  id_user number(9,0)  primary key,
   nickname varchar2(10) not null,
   email varchar2(30) not null,
   full_name varchar2(50) not null,
@@ -9,19 +9,19 @@ create table user(
 );
 
 create table artist(
-  id_user number(9,0) not null primary key,
+  id_user number(9,0) primary key,
   id_genre number(4,0),
   stage_name varchar2(30) not null, 
   wiki varchar2(300)
 );
 
 create table maker(
-  id_user number(9,0) not null primary key,
+  id_user number(9,0) primary key,
   tag varchar2(10)
 );
 
 create table media(
-  id_media number(10,0) not null primary key, 
+  id_media number(10,0) primary key, 
   duration varchar2(5) not null, 
   id_user number(9,0) not null, 
   description varchar2(50), 
@@ -32,24 +32,24 @@ create table media(
 );
 
 create table podcast(
-  id_media number(10,0) not null primary key,
+  id_media number(10,0) primary key,
   theme varchar2(20)
 );
 
 create table audiobook(
-  id_media number(10,0) not null primary key,
+  id_media number(10,0) primary key,
   title varchar2(20) not null,
   narrator varchar2(20) not null,
   author varchar2(20) not null
 );
 
 create table liveStream(
-  id_media number(10,0) not null primary key,
+  id_media number(10,0) primary key,
   schedule varchar2(20)
 );
 
 create table album(
-  id_user number(9,0) not null primary key,
+  id_user number(9,0) primary key,
   album_name varchar2(9,0) not null,
   release_year number(4,0) not null,
   id_genre number(4,0),
@@ -59,8 +59,8 @@ create table album(
 );
 
 create table song(
-  id_user number(9,0) not null primary key,
-  album_name varchar2(9,0) not null primary key,
+  id_user number(9,0) primary key,
+  album_name varchar2(9,0) primary key,
   song_name varchar2(20) not null,
   lyrics number(4,0),
   id_genre number(4,0),
@@ -71,7 +71,7 @@ create table song(
 );
 
 create table playList(
-  id_playList number(9,0) not null primary key,
+  id_playList number(9,0) primary key,
   id_user number(9,0) not null,
   description varchar2(30,0),
   creation_date date not null,
@@ -81,7 +81,7 @@ create table playList(
 );
 
 create table genre(
-  id_genre number(4,0) not null primary key,
+  id_genre number(4,0) primary key,
   genre_name varchar2(20) not null
 );
 
