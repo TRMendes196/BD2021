@@ -90,8 +90,6 @@ create table genre(
   genre_name varchar2(20)
 );
 
---relations
-
 create table cSong(
   id_cSong number(9,0),
   id_playList number(9,0),
@@ -100,6 +98,8 @@ create table cSong(
   song_name varchar2(20),
   order number(2,0)
 );
+
+--relations
 
 create table makeP(
   id_user number(9,0),
@@ -158,3 +158,28 @@ create assertion disjoint_media check
  (not exists ((select id_media from podcast) intersect (select id_media from audiobook)  intersect (select id_media from livestream)));
 
 
+-- sequences
+/*
+	Sequence for User id
+*/
+create sequence seq_user_id
+start with 1
+increment by 1;
+/*
+	Sequence for Media id
+*/
+create sequence seq_media_id
+start with 1
+increment by 1;
+/*
+	Sequence for Playlist id
+*/
+create sequence seq_playlist_id
+start with 1
+increment by 1;
+/*
+	Sequence for cSong id
+*/
+create sequence seq_csong_id
+start with 1
+increment by 1;
