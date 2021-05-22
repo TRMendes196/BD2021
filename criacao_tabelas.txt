@@ -183,3 +183,36 @@ increment by 1;
 create sequence seq_csong_id
 start with 1
 increment by 1;
+
+
+
+--triggers
+
+
+create or replace trigger trg_check_dates
+ before insert or update on Media
+ for each row 
+begin 
+    if( :new.creation_date <= SYSDATE ) 
+    then
+        RAISE_APPLICATION_ERROR( -20001,
+    'Invalid Creation Date: Date cant be greater than the current date');
+    end if;
+
+end;
+
+
+create trigger oder_playlist 
+	instead of delete on cSong
+	referencing old row as orow
+	for each row
+begin
+	update cSong
+	if: (order < orow.order)
+	set order = order - 1
+	where id_cSong = orow.id_cSong
+end
+
+
+
+
