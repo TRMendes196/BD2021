@@ -189,17 +189,50 @@ increment by 1;
 --triggers
 
 
-create or replace trigger trg_check_dates
- before insert or update on Media
- for each row 
-begin 
-    if( :new.creation_date <= SYSDATE ) 
-    then
-        RAISE_APPLICATION_ERROR( -20001,
-    'Invalid Creation Date: Date cant be greater than the current date');
-    end if;
-
-end;
+/
+ create or replace trigger Podcast_Create_Trigger
+ instead of insert on Podcast_Create
+ for each row
+ begin 
+    if( :new.creation_date > SYSDATE )
+    then 
+        RAISE_APPLICATION_ERROR( -20001, 'Invalid Date:
+        Creation date cannot be greater than the current date.');
+ insert into Media values (:new.id_media, :new.duration, :new.creation_date , :new.description, :new.views);
+ insert into Podcast values (:new.id_media, :new.theme);
+ 
+ end Podcast_Create_Trigger;
+ /
+ 
+ /
+ create or replace trigger AudioBook_Create_Trigger
+ instead of insert on AudioBook
+ for each row
+ begin 
+    if( :new.creation_date > SYSDATE )
+    then 
+        RAISE_APPLICATION_ERROR( -20001, 'Invalid Date:
+        Creation date cannot be greater than the current date.');
+ insert into Media values (:new.id_media, :new.duration, :new.creation_date , :new.description, :new.views);
+ insert into AudioBook values (:new.id_media, :new.title, :new.narrator, :new.author);
+ 
+ end AudioBook_Create_Trigger;
+ /
+ 
+ /
+ create or replace trigger LiveStream_Create_Trigger
+ instead of insert on LiveStream_Create
+ for each row
+ begin 
+    if( :new.creation_date > SYSDATE )
+    then 
+        RAISE_APPLICATION_ERROR( -20001, 'Invalid Date:
+        Creation date cannot be greater than the current date.');
+ insert into Media values (:new.id_media, :new.duration, :new.creation_date , :new.description, :new.views);
+ insert into LiveStream values (:new.id_media, :new.schedule);
+ 
+ end LiveStream_Create_Trigger;
+ /
 
 
 create trigger oder_playlist 
