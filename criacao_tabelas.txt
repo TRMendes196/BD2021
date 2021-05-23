@@ -213,6 +213,50 @@ begin
 	where id_cSong = orow.id_cSong
 end
 
+--views
+
+create or replace view user_listens_to as
+	(select id_user, song_name
+	from
+		((select id_user, id_playList
+		from follows union MakeP)
+	natural inner join
+		(select id_playList, song_name
+		from cSong))
+	)
+
+
+create or replace view user_playlists as
+	(select id_user, id_playlist
+	from follows union MakeP)
+
+
+create or replace view song_searchables as
+	(select song_name, stage_name, album_name, genre_name
+	from 
+	(artist natural inner join album)
+natural inner join
+	(album natural inner join song)
+natural inner join
+	(song natural inner join genre))
+	
+	
+create or replace media_in_playlist as
+	(select media
+	from media natural inner join cMedia)
+
+	
+create or replace view makers_and_media as
+	(select tag, id_media
+	from media natural inner join maker)
+	
+	
+	
+
+
+
+
+
 
 
 
