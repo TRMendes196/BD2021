@@ -279,7 +279,7 @@
     --************************************************* triggers
     
     
-    create or replace TRIGGER User_Num
+    create or replace TRIGGER User_Num_trigger
         BEFORE INSERT ON UserTemp
         REFERENCING NEW AS NROW
         FOR EACH ROW
@@ -292,7 +292,7 @@
         NROW.id_User := num_user;
     END;
     /
-    create or replace TRIGGER Genre_Num
+    create or replace TRIGGER Genre_Num_trigger
         BEFORE INSERT ON Genre
         REFERENCING NEW AS NROW
         FOR EACH ROW
